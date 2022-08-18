@@ -22,3 +22,35 @@ var GetUserQuery = &graphql.Field{
 		}, nil
 	},
 }
+
+var GetUsersQuery = &graphql.Field{
+	Type:        graphql.NewList(UserType),
+	Description: "List of users",
+	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+
+		users := []entity.User{
+			entity.User{
+				ID:        "1",
+				Name:      "Carlos Alba",
+				AvatarURL: "https://picsum.photos/350",
+			},
+			entity.User{
+				ID:        "2",
+				Name:      "Haley Levesque",
+				AvatarURL: "https://picsum.photos/350",
+			},
+			entity.User{
+				ID:        "3",
+				Name:      "Kit Alba",
+				AvatarURL: "https://picsum.photos/350",
+			},
+			entity.User{
+				ID:        "4",
+				Name:      "Pablo Alba",
+				AvatarURL: "https://picsum.photos/350",
+			},
+		}
+
+		return users, nil
+	},
+}

@@ -5,7 +5,8 @@ import (
 )
 
 var fields = graphql.Fields{
-	"user": GetUserQuery,
+	"user":  GetUserQuery,
+	"users": GetUsersQuery,
 }
 
 var rootQuery = graphql.ObjectConfig{Name: "RootQuery", Fields: fields}
