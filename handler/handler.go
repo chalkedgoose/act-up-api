@@ -33,16 +33,16 @@ type Handler struct {
 }
 
 type RequestOptions struct {
-	Query         string                 `json:"query" url:"query" schema:"query"`
-	Variables     map[string]interface{} `json:"variables" url:"variables" schema:"variables"`
-	OperationName string                 `json:"operationName" url:"operationName" schema:"operationName"`
+	Query         string                 `json:"query" url:"query" graphql-definitions:"query"`
+	Variables     map[string]interface{} `json:"variables" url:"variables" graphql-definitions:"variables"`
+	OperationName string                 `json:"operationName" url:"operationName" graphql-definitions:"operationName"`
 }
 
 // a workaround for getting`variables` as a JSON string
 type requestOptionsCompatibility struct {
-	Query         string `json:"query" url:"query" schema:"query"`
-	Variables     string `json:"variables" url:"variables" schema:"variables"`
-	OperationName string `json:"operationName" url:"operationName" schema:"operationName"`
+	Query         string `json:"query" url:"query" graphql-definitions:"query"`
+	Variables     string `json:"variables" url:"variables" graphql-definitions:"variables"`
+	OperationName string `json:"operationName" url:"operationName" graphql-definitions:"operationName"`
 }
 
 func getFromForm(values url.Values) *RequestOptions {
@@ -210,7 +210,7 @@ func New(p *Config) *Handler {
 	}
 
 	if p.Schema == nil {
-		panic("undefined GraphQL schema")
+		panic("undefined GraphQL graphql-definitions")
 	}
 
 	return &Handler{

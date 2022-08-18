@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/chalkedgoose/act-up-api/src/handler"
+	"github.com/chalkedgoose/act-up-api/handler"
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/graphql/gqlerrors"
 	"github.com/graphql-go/graphql/language/location"
@@ -151,7 +151,7 @@ func TestHandler_Params_NilParams(t *testing.T) {
 	defer func() {
 		if r := recover(); r != nil {
 			if str, ok := r.(string); ok {
-				if str != "undefined GraphQL schema" {
+				if str != "undefined GraphQL graphql-definitions" {
 					t.Fatalf("unexpected error, got %v", r)
 				}
 				// test passed

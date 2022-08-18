@@ -3,7 +3,7 @@ package handler_test
 import (
 	"bytes"
 	"fmt"
-	"github.com/chalkedgoose/act-up-api/src/handler"
+	"github.com/chalkedgoose/act-up-api/handler"
 	"net/http"
 	"net/url"
 	"reflect"

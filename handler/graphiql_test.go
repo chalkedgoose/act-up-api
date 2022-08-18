@@ -1,7 +1,7 @@
 package handler_test
 
 import (
-	"github.com/chalkedgoose/act-up-api/src/handler"
+	"github.com/chalkedgoose/act-up-api/handler"
 	"github.com/graphql-go/graphql/testutil"
 	"net/http"
 	"net/http/httptest"
