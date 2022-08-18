@@ -27,7 +27,6 @@ type Handler struct {
 	Schema           *graphql.Schema
 	pretty           bool
 	graphiql         bool
-	playground       bool
 	rootObjectFn     RootObjectFn
 	resultCallbackFn ResultCallbackFn
 	formatErrorFn    func(err error) gqlerrors.FormattedError
@@ -159,15 +158,6 @@ func (h *Handler) ContextHandler(ctx context.Context, w http.ResponseWriter, r *
 		}
 	}
 
-	if h.playground {
-		acceptHeader := r.Header.Get("Accept")
-		_, raw := r.URL.Query()["raw"]
-		if !raw && !strings.Contains(acceptHeader, "application/json") && strings.Contains(acceptHeader, "text/html") {
-			renderPlayground(w, r)
-			return
-		}
-	}
-
 	// use proper JSON Header
 	w.Header().Add("Content-Type", "application/json; charset=utf-8")
 
@@ -201,7 +191,6 @@ type Config struct {
 	Schema           *graphql.Schema
 	Pretty           bool
 	GraphiQL         bool
-	Playground       bool
 	RootObjectFn     RootObjectFn
 	ResultCallbackFn ResultCallbackFn
 	FormatErrorFn    func(err error) gqlerrors.FormattedError
@@ -209,10 +198,9 @@ type Config struct {
 
 func NewConfig() *Config {
 	return &Config{
-		Schema:     nil,
-		Pretty:     true,
-		GraphiQL:   true,
-		Playground: false,
+		Schema:   nil,
+		Pretty:   true,
+		GraphiQL: true,
 	}
 }
 
@@ -229,7 +217,6 @@ func New(p *Config) *Handler {
 		Schema:           p.Schema,
 		pretty:           p.Pretty,
 		graphiql:         p.GraphiQL,
-		playground:       p.Playground,
 		rootObjectFn:     p.RootObjectFn,
 		resultCallbackFn: p.ResultCallbackFn,
 		formatErrorFn:    p.FormatErrorFn,
