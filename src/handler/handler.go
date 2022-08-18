@@ -11,6 +11,10 @@ import (
 	"strings"
 )
 
+/**
+initial code copied from github.com/graphql-go/handler
+*/
+
 const (
 	ContentTypeJSON           = "application/json"
 	ContentTypeGraphQL        = "application/graphql"
