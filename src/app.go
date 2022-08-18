@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/chalkedgoose/act-up-api/src/handler"
+	"github.com/gin-gonic/gin"
 	"github.com/graphql-go/graphql"
 	"log"
 	"net/http"
@@ -33,11 +34,19 @@ func main() {
 		GraphiQL: true,
 	})
 
-	http.Handle("/graphql", h)
+	r := gin.Default()
 
-	err = http.ListenAndServe(":8080", nil)
+	r.Any("/graphql", gin.WrapH(h))
+
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "pong",
+		})
+	})
+
+	err = r.Run()
 
 	if err != nil {
-		log.Fatalf("failed to create new schema, error: %v", err)
+		return
 	}
 }
